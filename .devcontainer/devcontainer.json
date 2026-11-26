@@ -1,0 +1,27 @@
+{
+  "name": "jazzy desktop-full",
+  "dockerFile": "Dockerfile",
+ "runArgs": [
+  "--network=host",
+  "--ipc=host",
+  "-v", "/tmp/.X11-unix:/tmp/.X11-unix",
+  "-v", "/dev:/dev",
+  "--device-cgroup-rule=c 81:* rmw",    // camera
+  "--device-cgroup-rule=c 189:* rmw",   // camera
+  "--device-cgroup-rule=c 166:* rmw",   // serial (Arduino)
+  "--device-cgroup-rule=c 188:* rmw",   // serial
+  "--device-cgroup-rule=c 226:* rmw",   // GPU for Gazebo/rviz
+  "--group-add=video",
+  "--group-add=dialout"
+],
+  "containerEnv": {
+    "HOST_DISPLAY": "${localEnv:DISPLAY}",
+    "QT_X11_NO_MITSHM": "1"
+  },
+  "workspaceMount": "source=${localWorkspaceFolder},target=/${localWorkspaceFolderBasename},type=bind",
+  "workspaceFolder": "/${localWorkspaceFolderBasename}",
+  "features": {
+    "ghcr.io/devcontainers/features/desktop-lite:1": {}
+  },
+  "forwardPorts": [6080]
+}
