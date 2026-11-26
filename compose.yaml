@@ -1,0 +1,14 @@
+services:
+  ball_follower:
+    build: .
+    network_mode: host    # = --network=host
+    ipc: host             # = --ipc=host
+    device_cgroup_rules:
+      - 'c 81:* rmw'    # сamera
+      - 'c 81:* rmw'    # also сamera
+      - 'c 166:* rmw'   # serial port (arduino)
+      - 'c 188:* rmw'   # serial port
+    volumes:
+      - /dev:/dev
+
+    restart: unless-stopped
