@@ -15,9 +15,11 @@
   "--group-add=dialout"
 ],
   "containerEnv": {
-    "HOST_DISPLAY": "${localEnv:DISPLAY}",
     "QT_X11_NO_MITSHM": "1"
   },
+  "remoteEnv": {
+  "DISPLAY": "${localEnv:DISPLAY::1}"
+},
   "workspaceMount": "source=${localWorkspaceFolder},target=/${localWorkspaceFolderBasename},type=bind",
   "workspaceFolder": "/${localWorkspaceFolderBasename}",
   "features": {
